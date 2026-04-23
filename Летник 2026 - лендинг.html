@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Летник AYA 2026</title>
+  <style>
+    :root {
+      --bg-1: #061326;
+      --bg-2: #0a2547;
+      --card: rgba(255, 255, 255, 0.1);
+      --card-border: rgba(255, 255, 255, 0.25);
+      --text: #eef5ff;
+      --muted: #c8d9f3;
+      --accent-a: #3da5ff;
+      --accent-b: #7b8dff;
+      --ok: #88f0be;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, #154b91 0%, transparent 35%),
+        radial-gradient(circle at 85% 0%, #3a4ec8 0%, transparent 32%),
+        linear-gradient(140deg, var(--bg-1), var(--bg-2));
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .hero {
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      border-radius: 24px;
+      padding: 34px;
+      margin-top: 14px;
+    }
+
+    .hero, .section, .card {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: opacity, transform;
+    }
+
+    .is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1, h2, h3 { margin: 0 0 12px; font-weight: 600; }
+    h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.1; }
+    h2 { font-size: clamp(22px, 3.2vw, 34px); }
+    h3 { font-size: 20px; }
+    p { margin: 0 0 10px; color: var(--muted); }
+
+    .accent {
+      background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 26px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 14px;
+      color: #d9e8ff;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: #05111f;
+      font-weight: 600;
+      background: linear-gradient(90deg, #8ed4ff, #b5c6ff);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: inline-block;
+    }
+
+    .btn.secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid var(--card-border);
+    }
+
+    .section {
+      margin-top: 22px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .card p { margin: 0; font-size: 15px; }
+    ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    li { margin-bottom: 8px; }
+
+    .gallery {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 16px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      display: block;
+    }
+
+    .budget {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      color: var(--muted);
+    }
+
+    .budget th, .budget td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 10px 6px;
+      text-align: left;
+    }
+
+    .ok {
+      color: var(--ok);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>Летник <span class="accent">AYA 2026</span></h1>
+      <p>Свободный корпоративный день для 400 сотрудников: без сцены и давления, с фокусом на перезагрузку, связи между командами и рост лояльности.</p>
+      <div class="chips">
+        <span class="chip">400 сотрудников</span>
+        <span class="chip">15:00–00:00</span>
+        <span class="chip">Volga Spa Village</span>
+        <span class="chip">Chill-формат</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="#approval">Согласовать бюджет</a>
+        <a class="btn secondary" href="#timing">Смотреть тайминг</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Зачем это компании</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Удержание</h3>
+          <p>Снижение выгорания и усиление эмоциональной привязанности к компании.</p>
+        </article>
+        <article class="card">
+          <h3>HR-бренд</h3>
+          <p>Образ компании с культурой заботы и лучшей привлекательностью для найма.</p>
+        </article>
+        <article class="card">
+          <h3>Связи между отделами</h3>
+          <p>Горизонтальные знакомства и больше рабочих контактов между командами.</p>
+        </article>
+        <article class="card">
+          <h3>Лояльность к руководству</h3>
+          <p>Неформальный контакт снижает дистанцию между топ-менеджментом и сотрудниками.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Локация: Volga Spa Village</h2>
+      <ul>
+        <li>Природа, вода, уединение и атмосфера перезагрузки.</li>
+        <li>SPA-зоны, бассейн, бани, чаны.</li>
+        <li>Водные активности: 2 сапа на локации.</li>
+        <li>Вместимость под 400 человек без перегрузки пространства.</li>
+      </ul>
+      <div class="gallery">
+        <img src="assets/location-photos/location-1.png" alt="Реальное фото локации 1" />
+        <img src="assets/location-photos/location-2.png" alt="Реальное фото локации 2" />
+        <img src="assets/location-photos/location-3.png" alt="Реальное фото локации 3" />
+      </div>
+    </section>
+
+    <section class="section" id="timing">
+      <h2>Тайминг дня</h2>
+      <div class="grid">
+        <article class="card"><h3>15:00</h3><p>Старт, фуршет, мягкий вход в формат.</p></article>
+        <article class="card"><h3>16:00</h3><p>Квест на территории, легкое командное вовлечение.</p></article>
+        <article class="card"><h3>17:00</h3><p>Короткая официальная часть (обращение Валеры).</p></article>
+        <article class="card"><h3>18:00</h3><p>Горячее, основной прием пищи.</p></article>
+        <article class="card"><h3>19:00–23:00</h3><p>Свободный вечер и активности по выбору.</p></article>
+        <article class="card"><h3>00:00</h3><p>Завершение дня.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Что входит в концепцию</h2>
+      <div class="grid">
+        <article class="card"><p>Кейтеринг: еда + сервис</p></article>
+        <article class="card"><p>Кальяны</p></article>
+        <article class="card"><p>Водные активности (2 сапа)</p></article>
+        <article class="card"><p>Квест на территории</p></article>
+        <article class="card"><p>Инфраструктура локации</p></article>
+      </div>
+      <p style="margin-top: 14px;"><span class="ok">Принцип:</span> все активности опциональны, каждый выбирает свой сценарий дня.</p>
+    </section>
+
+    <section class="section">
+      <h2>Бюджет</h2>
+      <table class="budget">
+        <thead>
+          <tr><th>Статья</th><th>Сумма</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Локация (Volga Spa Village)</td><td>630 000 ₽</td></tr>
+          <tr><td>Кейтеринг (Шаба)</td><td>2 300 000 ₽</td></tr>
+          <tr><td>Квест / тимбилдинг</td><td>50 000 – 100 000 ₽</td></tr>
+          <tr><td>Кальяны</td><td>300 000 – 600 000 ₽</td></tr>
+          <tr><td>Скорая помощь</td><td>20 000 – 50 000 ₽</td></tr>
+          <tr><td>Алкоголь (Corona, алко и безалко)</td><td>360 000 – 460 000 ₽</td></tr>
+          <tr><td>Вода + снэки</td><td>80 000 ₽</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 12px;"><span class="ok">Итого:</span> 3 740 000 – 4 220 000 ₽ + резерв 10–15%.</p>
+    </section>
+
+    <section class="section" id="approval">
+      <h2>Запрос к руководству</h2>
+      <ul>
+        <li>Согласовать бюджет <strong>4 000 000 ₽</strong> (допустимое отклонение ±5%).</li>
+        <li>Закрепить дату как корпоративный выходной день (суббота, полный day-off).</li>
+      </ul>
+    </section>
+  </div>
+  <script>
+    const elements = document.querySelectorAll('.hero, .section, .card');
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    elements.forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
