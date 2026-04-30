@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Структура бекофиса</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #061229;
+        --bg-soft: #0f1d3a;
+        --text: #eaf2ff;
+        --text-soft: #aec0de;
+        --line: rgba(162, 190, 236, 0.28);
+        --glass: rgba(255, 255, 255, 0.1);
+        --glass-strong: rgba(255, 255, 255, 0.14);
+        --accent-a: #2b70ff;
+        --accent-b: #5d8dff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at 8% 14%, rgba(58, 120, 255, 0.4), transparent 37%),
+          radial-gradient(circle at 90% 0%, rgba(93, 141, 255, 0.32), transparent 30%),
+          linear-gradient(140deg, var(--bg), var(--bg-soft));
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      .container {
+        width: min(1200px, 92vw);
+        margin: 0 auto;
+        padding: 38px 0 44px;
+      }
+
+      .hero {
+        padding: 26px;
+        border-radius: 20px;
+        background: linear-gradient(120deg, rgba(29, 90, 245, 0.6), rgba(111, 152, 255, 0.3));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(26px, 3.2vw, 40px);
+        line-height: 1.1;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        margin: 0;
+        color: #edf4ff;
+        max-width: 760px;
+        line-height: 1.5;
+      }
+
+      .filters,
+      .meta-card,
+      .team-card {
+        background: var(--glass);
+        border: 1px solid var(--line);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-radius: 16px;
+      }
+
+      .filters {
+        margin-top: 16px;
+        padding: 16px;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      label {
+        font-size: 12px;
+        color: var(--text-soft);
+      }
+
+      select,
+      input[type="search"] {
+        width: 100%;
+        border: 1px solid rgba(191, 209, 238, 0.34);
+        border-radius: 12px;
+        padding: 10px 12px;
+        background: rgba(10, 23, 50, 0.55);
+        color: var(--text);
+        font-size: 14px;
+      }
+
+      select:focus,
+      input[type="search"]:focus {
+        outline: 2px solid rgba(112, 157, 255, 0.8);
+        border-color: transparent;
+      }
+
+      .toolbar {
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .meta-card {
+        margin-top: 16px;
+        padding: 14px 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .meta-item {
+        font-size: 14px;
+        color: var(--text-soft);
+      }
+
+      .meta-item b {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      button {
+        border: 0;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-weight: 600;
+        color: white;
+        cursor: pointer;
+        background: linear-gradient(120deg, var(--accent-a), var(--accent-b));
+      }
+
+      .grid {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+        gap: 12px;
+      }
+
+      .team-card {
+        padding: 16px;
+      }
+
+      .team-title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .team-count {
+        margin: 6px 0 14px;
+        font-size: 13px;
+        color: var(--text-soft);
+      }
+
+      .direction {
+        margin-bottom: 12px;
+        border-top: 1px solid rgba(185, 205, 241, 0.18);
+        padding-top: 10px;
+      }
+
+      .direction:first-of-type {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .direction-title {
+        margin: 0 0 8px;
+        font-size: 14px;
+        color: #d7e5ff;
+        font-weight: 600;
+      }
+
+      .role {
+        margin-bottom: 8px;
+      }
+
+      .role-name {
+        display: inline-block;
+        font-size: 13px;
+        margin-bottom: 4px;
+        color: #d3e3ff;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid rgba(153, 184, 238, 0.35);
+        border-radius: 999px;
+        padding: 4px 8px;
+        font-size: 12px;
+        color: #eff5ff;
+        background: var(--glass-strong);
+      }
+
+      .empty {
+        margin-top: 20px;
+        text-align: center;
+        color: var(--text-soft);
+      }
+
+      @media (max-width: 980px) {
+        .filters {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 620px) {
+        .filters {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <section class="hero">
+        <h1>Структура бекофиса</h1>
+        <p class="subtitle">
+          Живая оргструктура по данным CSV: команды, направления, должности и сотрудники.
+          Используйте фильтры ниже, чтобы быстро найти нужный блок.
+        </p>
+      </section>
+
+      <section class="filters">
+        <div class="field">
+          <label for="teamFilter">Департамент</label>
+          <select id="teamFilter"></select>
+        </div>
+        <div class="field">
+          <label for="directionFilter">Направление</label>
+          <select id="directionFilter"></select>
+        </div>
+        <div class="field">
+          <label for="roleFilter">Должность</label>
+          <select id="roleFilter"></select>
+        </div>
+        <div class="field">
+          <label for="searchInput">Поиск по нику</label>
+          <input id="searchInput" type="search" placeholder="например, masher" />
+        </div>
+      </section>
+
+      <div class="toolbar">
+        <div></div>
+        <button id="resetBtn" type="button">Сбросить фильтры</button>
+      </div>
+
+      <section class="meta-card">
+        <div class="meta-item">Команд: <b id="teamCount">0</b></div>
+        <div class="meta-item">Должностей: <b id="roleCount">0</b></div>
+        <div class="meta-item">Сотрудников: <b id="peopleCount">0</b></div>
+      </section>
+
+      <section id="cards" class="grid"></section>
+      <p id="emptyState" class="empty" hidden>По этим фильтрам ничего не найдено.</p>
+    </main>
+
+    <script>
+      const structure = [
+        {
+          team: "BackOffice",
+          directions: [
+            { name: "General", roles: [{ title: "Assistant Director", people: ["vasilisa"] }, { title: "Cleaner", people: ["cinderella", "eles", "tin"] }, { title: "Director BackOffice", people: ["lawyer"] }, { title: "First Deputy Director", people: ["masher"] }, { title: "HRD", people: ["masher"] }] },
+            { name: "Office", roles: [{ title: "Group Lead", people: ["sidney"] }, { title: "Office Manager", people: ["amelia", "disha"] }] }
+          ]
+        },
+        {
+          team: "F-Team",
+          directions: [
+            { name: "Accounting", roles: [{ title: "Bookkeeper", people: ["alseef", "leksa", "nyasha", "rebecca"] }, { title: "Head of the Financial Accounting", people: ["botin"] }] },
+            { name: "Economic", roles: [{ title: "Financial Manager", people: ["edmonda", "jamcube"] }, { title: "Team Lead", people: ["lolik"] }] },
+            { name: "Treas", roles: [{ title: "Payment Specialist", people: ["alseef", "surplus"] }, { title: "Team Lead", people: ["finabc"] }] }
+          ]
+        },
+        {
+          team: "HR-Team",
+          directions: [
+            { name: "HR Brand", roles: [{ title: "HR", people: ["roof"] }, { title: "Team Lead", people: ["surplus"] }] },
+            { name: "HR T&D", roles: [{ title: "Business Coach", people: ["likachy"] }, { title: "HR", people: ["tetcher"] }, { title: "Team Lead", people: ["kashtan"] }] },
+            { name: "HR Tech", roles: [{ title: "HR", people: ["cherry"] }, { title: "Team Lead", people: ["eleven"] }] },
+            { name: "People Support Center", roles: [{ title: "HR BP", people: ["esprit", "miata", "sunday", "wendy", "yasna"] }, { title: "HR PP", people: ["afa", "dafna", "lynea", "mila"] }, { title: "Team Lead", people: ["vanessa"] }] }
+          ]
+        },
+        {
+          team: "I-Team",
+          directions: [
+            { name: "General", roles: [{ title: "CINO", people: ["konrad"] }, { title: "Engineer", people: ["alexdastr", "turing"] }] },
+            { name: "Automation", roles: [{ title: "Analyst", people: ["soleil"] }, { title: "Fullstack Analyst", people: ["marcus"] }, { title: "Project Manager", people: ["crabs"] }, { title: "Systems Analyst", people: ["viksystems"] }, { title: "Team Lead", people: ["seven"] }] },
+            { name: "BI", roles: [{ title: "Analyst", people: ["bodwe", "darkwing", "dax", "elisa", "honeybadger", "lirend"] }, { title: "Senior Analyst", people: ["sidside"] }, { title: "Senior Engineer", people: ["fenix"] }, { title: "Team Lead", people: ["sniazs"] }] },
+            { name: "Designer", roles: [{ title: "Designer", people: ["lindsey"] }] },
+            { name: "Development", roles: [{ title: "Backend Developer", people: ["drhouse"] }, { title: "CTO", people: ["socrat"] }, { title: "Developer", people: ["actor", "nemo"] }, { title: "Frontend Developer", people: ["redcoala", "rig"] }, { title: "Junior SRE (Site Reliability Engineer)", people: ["kaladin", "kvothe"] }, { title: "QA", people: ["azazellooy"] }] }
+          ]
+        },
+        {
+          team: "IT-Team",
+          directions: [
+            { name: "General", roles: [{ title: "CIO", people: ["oscar"] }] },
+            { name: "IT", roles: [{ title: "1С Administrator", people: ["pascal"] }, { title: "Account Manager", people: ["hidan", "sohrab"] }, { title: "Billing Manager", people: ["echo", "libra"] }, { title: "Bitrix Administrator", people: ["pudge"] }, { title: "System Administrator", people: ["maleks"] }, { title: "Team Lead", people: ["ostin"] }, { title: "Technical Writer", people: ["radana"] }] },
+            { name: "Tech", roles: [{ title: "Devops", people: ["bastianich", "kaktyz", "lain", "ron", "semanya", "whiskey"] }, { title: "System Administrator", people: ["jin", "kafka"] }, { title: "Team Lead", people: ["hannt"] }] }
+          ]
+        },
+        {
+          team: "L-Team",
+          directions: [
+            { name: "Legal", roles: [{ title: "Lawyer", people: ["allred", "joss", "nurone", "zg_lawyer"] }, { title: "Team Lead", people: ["dayflow"] }] },
+            { name: "Staff", roles: [{ title: "HR Specialist", people: ["almira", "liberty"] }, { title: "Team Lead", people: ["ana_lawyer"] }] }
+          ]
+        },
+        {
+          team: "Rec-Team",
+          directions: [
+            { name: "General", roles: [{ title: "Head of Recruiting", people: ["ariadna"] }] },
+            { name: "Recruiting", roles: [{ title: "IT Recruiter", people: ["dordis", "lira", "lucia", "makartaa"] }, { title: "Recruiter", people: ["aglaya", "barbie"] }] }
+          ]
+        }
+      ];
+
+      const cards = document.getElementById("cards");
+      const emptyState = document.getElementById("emptyState");
+      const teamFilter = document.getElementById("teamFilter");
+      const directionFilter = document.getElementById("directionFilter");
+      const roleFilter = document.getElementById("roleFilter");
+      const searchInput = document.getElementById("searchInput");
+      const teamCount = document.getElementById("teamCount");
+      const roleCount = document.getElementById("roleCount");
+      const peopleCount = document.getElementById("peopleCount");
+      const resetBtn = document.getElementById("resetBtn");
+
+      const uniq = (arr) => [...new Set(arr)].sort((a, b) => a.localeCompare(b, "ru"));
+
+      function makeOptions(select, values, placeholder) {
+        select.innerHTML = `<option value="">${placeholder}</option>`;
+        values.forEach((value) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = value;
+          select.append(option);
+        });
+      }
+
+      function getAllDirections(data) {
+        return uniq(data.flatMap((team) => team.directions.map((direction) => direction.name)));
+      }
+
+      function getAllRoles(data) {
+        return uniq(data.flatMap((team) => team.directions.flatMap((direction) => direction.roles.map((role) => role.title))));
+      }
+
+      function buildFilters() {
+        makeOptions(teamFilter, uniq(structure.map((team) => team.team)), "Все департаменты");
+        makeOptions(directionFilter, getAllDirections(structure), "Все направления");
+        makeOptions(roleFilter, getAllRoles(structure), "Все должности");
+      }
+
+      function filterStructure() {
+        const teamValue = teamFilter.value.trim().toLowerCase();
+        const directionValue = directionFilter.value.trim().toLowerCase();
+        const roleValue = roleFilter.value.trim().toLowerCase();
+        const searchValue = searchInput.value.trim().toLowerCase();
+
+        const filteredTeams = structure
+          .filter((team) => !teamValue || team.team.toLowerCase() === teamValue)
+          .map((team) => {
+            const filteredDirections = team.directions
+              .filter((direction) => !directionValue || direction.name.toLowerCase() === directionValue)
+              .map((direction) => {
+                const filteredRoles = direction.roles
+                  .filter((role) => !roleValue || role.title.toLowerCase() === roleValue)
+                  .map((role) => {
+                    const people = role.people.filter((person) => !searchValue || person.toLowerCase().includes(searchValue));
+                    return { ...role, people };
+                  })
+                  .filter((role) => role.people.length > 0);
+                return { ...direction, roles: filteredRoles };
+              })
+              .filter((direction) => direction.roles.length > 0);
+            return { ...team, directions: filteredDirections };
+          })
+          .filter((team) => team.directions.length > 0);
+
+        render(filteredTeams);
+      }
+
+      function render(data) {
+        cards.innerHTML = "";
+
+        let totalRoles = 0;
+        let totalPeople = 0;
+
+        data.forEach((team) => {
+          const teamCard = document.createElement("article");
+          teamCard.className = "team-card";
+
+          let teamPeople = 0;
+          let teamRoles = 0;
+
+          const directionBlocks = team.directions
+            .map((direction) => {
+              const roleBlocks = direction.roles
+                .map((role) => {
+                  teamRoles += 1;
+                  totalRoles += 1;
+                  teamPeople += role.people.length;
+                  totalPeople += role.people.length;
+
+                  const chips = role.people.map((person) => `<span class="chip">${person}</span>`).join("");
+
+                  return `
+                    <div class="role">
+                      <span class="role-name">${role.title}</span>
+                      <div class="chips">${chips}</div>
+                    </div>
+                  `;
+                })
+                .join("");
+
+              return `
+                <div class="direction">
+                  <p class="direction-title">${direction.name}</p>
+                  ${roleBlocks}
+                </div>
+              `;
+            })
+            .join("");
+
+          teamCard.innerHTML = `
+            <h2 class="team-title">${team.team}</h2>
+            <p class="team-count">Должностей: ${teamRoles} | Сотрудников: ${teamPeople}</p>
+            ${directionBlocks}
+          `;
+          cards.append(teamCard);
+        });
+
+        teamCount.textContent = String(data.length);
+        roleCount.textContent = String(totalRoles);
+        peopleCount.textContent = String(totalPeople);
+        emptyState.hidden = data.length > 0;
+      }
+
+      [teamFilter, directionFilter, roleFilter, searchInput].forEach((el) => {
+        el.addEventListener("input", filterStructure);
+      });
+
+      resetBtn.addEventListener("click", () => {
+        teamFilter.value = "";
+        directionFilter.value = "";
+        roleFilter.value = "";
+        searchInput.value = "";
+        filterStructure();
+      });
+
+      buildFilters();
+      render(structure);
+    </script>
+  </body>
+</html>
